@@ -10,10 +10,12 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+     console.log('Logging in with:', { email, password }); // ✅ Add this
     try {
       await login(email, password);
       navigate('/tasks');
     } catch {
+      console.log('Logging in with:', { email, password }); // ✅ Add this
       alert('Login failed');
     }
   };
