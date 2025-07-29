@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app',
+  origin: process.env.CLIENT_ORIGIN || 'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app' || 'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app',
   credentials: true,
 }));
 app.use(express.json());
