@@ -41,22 +41,25 @@ export const register = async (req, res) => {
 // @route   POST /api/auth/login
 export const login = async (req, res) => {
   try {
+    console.log('Login request received with body:', req.body);
+
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      console.log('Missing email or password');
+      return res.status(400).json({ error: 'Email and password required' });
+    }
 
     const user = await User.findOne({ email }).select('+password');
     if (!user) {
-      return res.status(401).json({
-        success: false,
-        error: 'Invalid credentials',
-      });
+      console.log('User not found:', email);
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        error: 'Invalid credentials',
-      });
+      console.log('Password mismatch for:', email);
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -71,16 +74,15 @@ export const login = async (req, res) => {
         name: user.name,
         email: user.email,
         createdAt: user.createdAt,
-        updatedAt: user.updatedAt
+        updatedAt: user.updatedAt,
       },
     });
   } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: 'Login failed: ' + err.message,
-    });
+    console.error('Login error:', err);
+    res.status(400).json({ success: false, error: 'Login failed: ' + err.message });
   }
 };
+
 
 // @desc    Get current user
 // @route   GET /api/auth/me
