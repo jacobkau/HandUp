@@ -1,16 +1,21 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import tailwindcss from '@tailwindcss/vite';
 
-// https://vite.dev/config/
+const isProduction = process.env.NODE_ENV === 'production';
+
 export default defineConfig({
-  plugins: [react(),tailwindcss(),],
-    server: {
+  plugins: [react(), tailwindcss()],
+  server: {
     proxy: {
       '/socket.io': {
-        target: 'http://localhost:5000',
-        ws: true, 
+        target: isProduction
+          ? 'https://handup.onrender.com'
+          : 'http://localhost:5000',
+        ws: true,
+        changeOrigin: true,
+        secure: false,
       },
     },
   },
-})
+});
