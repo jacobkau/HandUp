@@ -19,12 +19,11 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     console.log('Registering in with:', { email, password }); // ✅ Add this
     try {
       await register(formData);
       navigate('/tasks');
     } catch (err) {
-       console.error('Registering error:', err.response?.data || err.message); // ✅ Add this
+     
       console.error('Registration failed:', err);
     }
   };
