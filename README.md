@@ -215,16 +215,17 @@ Witty HandUp simplifies task delegation in communities. With **secure auth**, **
 --- 
 
 ## 🌍 Live Demo
+**Backend**
+🔗 [Witty HandUp Live on Render](https://handup.onrender.com)
 
-🔗 [Click here to view the deployed app](https://your-live-demo-link.com)
-
---- 
+**Frontend**
+[Witty HandUp Live on Vercel](https://wittyhandupsystem.vercel.app/)
 
 ## 🎥 Video Demo
 
-📽️ [Click here to view or download the demo video](./demo.mp4)
-
+📺 [Watch the full walkthrough on YouTube](https://youtu.be/43tpj-NikrY)
 --- 
+
 
 ### **License**  
 MIT © 2023 Witty HandUp Team
