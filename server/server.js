@@ -10,10 +10,21 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const allowedOrigins = [
+  'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app',
+  'https://wittyhandupsystem-git-main-jacobkaus-projects.vercel.app',
+  process.env.CLIENT_ORIGIN, // Optional override
+];
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || 'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app' || 'https://wittyhandupsystem-k56r3kyf7-jacobkaus-projects.vercel.app',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error(`Not allowed by CORS: ${origin}`));
+    }
+  },
   credentials: true,
 }));
 app.use(express.json());
