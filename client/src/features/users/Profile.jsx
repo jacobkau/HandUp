@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api/auth',
+  baseURL: 'https://handup.onrender.com/api/auth',
 });
 
 export default function Profile() {
